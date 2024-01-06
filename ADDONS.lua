@@ -1,7 +1,7 @@
 local imgui = require 'mimgui'
 local ffi = require 'ffi'
 
--- \\ ИНФОРМАЦИЯ:
+
 local M = {}
 setmetatable(M, {
 	__index = function(self, index)
@@ -13,7 +13,7 @@ setmetatable(M, {
 	end
 })
 
--- \\ Пулы:
+
 local AI_HINTS = {}
 local AI_MATERIAL = {}
 local AI_ANIMBUT = {}
@@ -22,11 +22,11 @@ local AI_PICTURE = {}
 local AI_HEADERBUT = {}
 local AI_PAGE = {}
 
--- \\ ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ:
+
 local ToU32 = imgui.ColorConvertFloat4ToU32
 local ToVEC = imgui.ColorConvertU32ToFloat4
 
-function limit(v, min, max) -- Ограничение динамического значения
+function limit(v, min, max) 
 	min = min or 0.0
 	max = max or 1.0
 	return v < min and min or (v > max and max or v)
@@ -67,7 +67,7 @@ function bringFloatTo(from, to, start_time, duration)
     return (timer > duration) and to or from, false
 end
 
-function isPlaceHovered(a, b) -- Проверка находится ли курсор в указанной области
+function isPlaceHovered(a, b)
 	local m = imgui.GetMousePos()
 	if m.x >= a.x and m.y >= a.y then
 		if m.x <= b.x and m.y <= b.y then
@@ -77,14 +77,14 @@ function isPlaceHovered(a, b) -- Проверка находится ли курсор в указанной област
 	return false
 end
 
-function getContrastColor(bg_col, col_1, col_2) -- Получение цвета текста в зависимости от фона
+function getContrastColor(bg_col, col_1, col_2)
 	col_1 = col_1 or imgui.ImVec4(0.00, 0.00, 0.00, 1.00)
 	col_2 = col_2 or imgui.ImVec4(1.00, 1.00, 1.00, 1.00)
     local luminance = 1 - (0.299 * bg_col.x + 0.587 * bg_col.y + 0.114 * bg_col.z)
     return luminance < 0.5 and col_1 or col_2
 end
 
-function set_alpha(color, alpha) -- Получение цвета с определённой прозрачностью
+function set_alpha(color, alpha)
 	alpha = alpha and limit(alpha, 0.0, 1.0) or 1.0
 	return imgui.ImVec4(color.x, color.y, color.z, alpha)
 end
@@ -97,7 +97,7 @@ M.isPlaceHovered = isPlaceHovered
 M.getContrastColor = getContrastColor
 M.set_alpha = set_alpha
 
--- \\ ЭЛЕМЕНТЫ:
+
 M.MaterialButton = function(str_id, size, duration)
 	if type(duration) ~= 'table' then
 		duration = { 0.4, 0.2, 0.4 }
@@ -605,7 +605,7 @@ M.ToggleButton = function(str_id, value)
 end
 
 M.Picture = function(str_id, image, size, mult, hint)
-	hint = hint or u8'Увеличить изображение'
+	hint = hint or u8'Г“ГўГҐГ«ГЁГ·ГЁГІГј ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГҐ'
 	mult = mult and limit(mult, 2, 10) or 5
 	local duration = { 0.3, 1.0 }
 	local p = imgui.GetCursorScreenPos()
