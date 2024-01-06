@@ -17,7 +17,7 @@ HOTKEY = {
 		author = 'СоМиК'
 	},
 	Text = {
-		WaitForKey = 'Нажмите любую клавишу...',
+		WaitForKey = 'Нажмите клавишу...',
 		NoKey = '< Свободно >'
 	},
 	List = {},
